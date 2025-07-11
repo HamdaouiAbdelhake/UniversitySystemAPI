@@ -1,0 +1,14 @@
+/home/abdelhake/projects/internship/day3/UniversitySystem/University.Data/bin/Debug/net8.0/University.Data.deps.json
+/home/abdelhake/projects/internship/day3/UniversitySystem/University.Data/bin/Debug/net8.0/University.Data.runtimeconfig.json
+/home/abdelhake/projects/internship/day3/UniversitySystem/University.Data/bin/Debug/net8.0/University.Data.dll
+/home/abdelhake/projects/internship/day3/UniversitySystem/University.Data/bin/Debug/net8.0/University.Data.pdb
+/home/abdelhake/projects/internship/day3/UniversitySystem/University.Data/obj/Debug/net8.0/University.Data.csproj.AssemblyReference.cache
+/home/abdelhake/projects/internship/day3/UniversitySystem/University.Data/obj/Debug/net8.0/University.Data.GeneratedMSBuildEditorConfig.editorconfig
+/home/abdelhake/projects/internship/day3/UniversitySystem/University.Data/obj/Debug/net8.0/University.Data.AssemblyInfoInputs.cache
+/home/abdelhake/projects/internship/day3/UniversitySystem/University.Data/obj/Debug/net8.0/University.Data.AssemblyInfo.cs
+/home/abdelhake/projects/internship/day3/UniversitySystem/University.Data/obj/Debug/net8.0/University.Data.csproj.CoreCompileInputs.cache
+/home/abdelhake/projects/internship/day3/UniversitySystem/University.Data/obj/Debug/net8.0/University.Data.dll
+/home/abdelhake/projects/internship/day3/UniversitySystem/University.Data/obj/Debug/net8.0/refint/University.Data.dll
+/home/abdelhake/projects/internship/day3/UniversitySystem/University.Data/obj/Debug/net8.0/University.Data.pdb
+/home/abdelhake/projects/internship/day3/UniversitySystem/University.Data/obj/Debug/net8.0/University.Data.genruntimeconfig.cache
+/home/abdelhake/projects/internship/day3/UniversitySystem/University.Data/obj/Debug/net8.0/ref/University.Data.dll
