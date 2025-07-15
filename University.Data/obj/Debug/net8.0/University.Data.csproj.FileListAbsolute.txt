@@ -12,3 +12,4 @@
 /home/abdelhake/projects/internship/day3/UniversitySystem/University.Data/obj/Debug/net8.0/University.Data.pdb
 /home/abdelhake/projects/internship/day3/UniversitySystem/University.Data/obj/Debug/net8.0/University.Data.genruntimeconfig.cache
 /home/abdelhake/projects/internship/day3/UniversitySystem/University.Data/obj/Debug/net8.0/ref/University.Data.dll
+/home/abdelhake/projects/internship/day3/UniversitySystem/University.Data/obj/Debug/net8.0/University.Data.sourcelink.json
