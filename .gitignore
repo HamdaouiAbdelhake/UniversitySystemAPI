@@ -1,2 +1,4 @@
 /.idea/
 /University.API/appsettings.json
+/University.API/Logs/*
+

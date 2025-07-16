@@ -2,6 +2,7 @@ using Autofac;
 using Autofac.Extensions.DependencyInjection;
 using AutoWrapper;
 using Microsoft.EntityFrameworkCore;
+using Serilog;
 using University.API.Modules;
 using University.Data.Contexts;
 
@@ -13,6 +14,14 @@ builder.Host.ConfigureContainer<ContainerBuilder>(builder =>
         builder.RegisterModule(new ServiceModule());
         builder.RegisterModule(new RepositoryModule());
     });
+// Logger
+Log.Logger = new LoggerConfiguration()
+    .MinimumLevel.Warning()
+    .WriteTo.File("Logs/log-.txt", rollingInterval: RollingInterval.Day)
+    .CreateLogger();
+builder.Host.UseSerilog();
+
+
 // Add services to the container.
 
 builder.Services.AddDbContext<UniversityDbContext>(options =>
