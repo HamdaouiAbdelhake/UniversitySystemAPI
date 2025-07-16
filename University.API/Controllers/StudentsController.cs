@@ -1,5 +1,6 @@
 using System.Net;
 using AutoWrapper.Wrappers;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using University.API.Filters;
 using University.Core.DTOs;
@@ -11,6 +12,7 @@ namespace University.API.Controllers;
 [ApiController]
 [Route("api/v1/students")]
 [TypeFilter(typeof(ApiExceptionFilter))]
+[Authorize(Roles = "Student")]
 public class StudentsController : ControllerBase
 {
     private readonly IStudentService _service;
@@ -24,6 +26,7 @@ public class StudentsController : ControllerBase
     [ProducesResponseType(StatusCodes.Status200OK)]
     [ProducesResponseType(StatusCodes.Status400BadRequest)]
     [ProducesResponseType(StatusCodes.Status500InternalServerError)]
+    [ProducesResponseType(StatusCodes.Status403Forbidden)]
     public ApiResponse GetAllStudents()
     {
         return new ApiResponse(_service.GetAll(),200);
@@ -33,6 +36,7 @@ public class StudentsController : ControllerBase
     [ProducesResponseType(StatusCodes.Status200OK)]
     [ProducesResponseType(StatusCodes.Status400BadRequest)]
     [ProducesResponseType(StatusCodes.Status500InternalServerError)]
+    [ProducesResponseType(StatusCodes.Status403Forbidden)]
     public ApiResponse GetStudentById(int id)
     {
         StudentDTO dto = _service.GetById(id);
@@ -43,6 +47,7 @@ public class StudentsController : ControllerBase
     [ProducesResponseType(StatusCodes.Status201Created)]
     [ProducesResponseType(StatusCodes.Status400BadRequest)]
     [ProducesResponseType(StatusCodes.Status500InternalServerError)]
+    [ProducesResponseType(StatusCodes.Status403Forbidden)]
     public ApiResponse CreateStudent([FromBody] CreateStudentForm form)
     {
         _service.Create(form);
@@ -53,6 +58,7 @@ public class StudentsController : ControllerBase
     [ProducesResponseType(StatusCodes.Status200OK)]
     [ProducesResponseType(StatusCodes.Status400BadRequest)]
     [ProducesResponseType(StatusCodes.Status500InternalServerError)]
+    [ProducesResponseType(StatusCodes.Status403Forbidden)]
     public ApiResponse UpdateStudent(int id,[FromBody] UpdateStudentForm form)
     {
         _service.Update(id,form);
@@ -63,6 +69,7 @@ public class StudentsController : ControllerBase
     [ProducesResponseType(StatusCodes.Status200OK)]
     [ProducesResponseType(StatusCodes.Status400BadRequest)]
     [ProducesResponseType(StatusCodes.Status500InternalServerError)]
+    [ProducesResponseType(StatusCodes.Status403Forbidden)]
     public ApiResponse DeleteStudent(int id)
     {
         _service.Delete(id);

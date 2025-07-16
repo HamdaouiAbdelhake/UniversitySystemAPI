@@ -1,5 +1,6 @@
 using System.Net;
 using AutoWrapper.Wrappers;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using University.API.Filters;
 using University.Core.DTOs;
@@ -12,6 +13,7 @@ namespace University.API.Controllers;
 [ApiController]
 [Route("api/v1/courses")]
 [TypeFilter(typeof(ApiExceptionFilter))]
+[Authorize(Roles = "Teacher")]
 public class CoursesController : ControllerBase
 {
     private readonly ICourseService _service;
@@ -25,6 +27,7 @@ public class CoursesController : ControllerBase
     [ProducesResponseType(StatusCodes.Status200OK)]
     [ProducesResponseType(StatusCodes.Status400BadRequest)]
     [ProducesResponseType(StatusCodes.Status500InternalServerError)]
+    [ProducesResponseType(StatusCodes.Status403Forbidden)]
     public ApiResponse GetAllCourses()
     {
         return new ApiResponse(_service.GetAll());
@@ -34,6 +37,7 @@ public class CoursesController : ControllerBase
     [ProducesResponseType(StatusCodes.Status200OK)]
     [ProducesResponseType(StatusCodes.Status400BadRequest)]
     [ProducesResponseType(StatusCodes.Status500InternalServerError)]
+    [ProducesResponseType(StatusCodes.Status403Forbidden)]
     public ApiResponse GetCourseById(int id)
     {
         CourseDTO dto = _service.GetById(id);
@@ -44,6 +48,7 @@ public class CoursesController : ControllerBase
     [ProducesResponseType(StatusCodes.Status201Created)]
     [ProducesResponseType(StatusCodes.Status400BadRequest)]
     [ProducesResponseType(StatusCodes.Status500InternalServerError)]
+    [ProducesResponseType(StatusCodes.Status403Forbidden)]
     public ApiResponse CreateCourse([FromBody] CreateCourseForm form)
     {
         _service.Create(form);
@@ -54,6 +59,7 @@ public class CoursesController : ControllerBase
     [ProducesResponseType(StatusCodes.Status200OK)]
     [ProducesResponseType(StatusCodes.Status400BadRequest)]
     [ProducesResponseType(StatusCodes.Status500InternalServerError)]
+    [ProducesResponseType(StatusCodes.Status403Forbidden)]
     public ApiResponse UpdateCourse(int id,[FromBody] UpdateCourseForm form)
     {
         _service.Update(id,form);
@@ -64,6 +70,7 @@ public class CoursesController : ControllerBase
     [ProducesResponseType(StatusCodes.Status200OK)]
     [ProducesResponseType(StatusCodes.Status400BadRequest)]
     [ProducesResponseType(StatusCodes.Status500InternalServerError)]
+    [ProducesResponseType(StatusCodes.Status403Forbidden)]
     public ApiResponse DeleteCourse(int id)
     {
         _service.Delete(id);

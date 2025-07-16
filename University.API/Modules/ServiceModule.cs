@@ -1,4 +1,5 @@
 using Autofac;
+using University.API.Helpers;
 using University.Core.Services;
 using University.Data.Contexts;
 using University.Data.Repositories;
@@ -11,6 +12,8 @@ public class ServiceModule : Module
     {
         builder.RegisterType<StudentService>().As<IStudentService>().InstancePerLifetimeScope();
         builder.RegisterType<CourseService>().As<ICourseService>().InstancePerLifetimeScope();
+        builder.RegisterType<AuthService>().As<IAuthService>().InstancePerLifetimeScope();
+        builder.RegisterType<JwtTokenHelper>().As<IJwtTokenHelper>().InstancePerLifetimeScope();
     }
     
 }
