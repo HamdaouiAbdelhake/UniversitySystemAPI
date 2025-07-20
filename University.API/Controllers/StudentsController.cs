@@ -12,7 +12,7 @@ namespace University.API.Controllers;
 [ApiController]
 [Route("api/v1/students")]
 [TypeFilter(typeof(ApiExceptionFilter))]
-[Authorize(Roles = "Student")]
+[Authorize]
 public class StudentsController : ControllerBase
 {
     private readonly IStudentService _service;

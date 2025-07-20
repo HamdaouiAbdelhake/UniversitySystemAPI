@@ -34,6 +34,9 @@ public class AuthService : IAuthService
             var user = await _userManager.FindByNameAsync(form.Email);
             if (user == null)
                 throw new NotFoundException($"Unable to find a user with email {form.Email}");
+            
+            var roles = await _userManager.GetRolesAsync(user);
+            var roleName = roles.FirstOrDefault();
             return new UserDTO
             {
                 Id = user.Id,
@@ -43,6 +46,7 @@ public class AuthService : IAuthService
                 EmailConfirmed = user.EmailConfirmed,
                 PhoneNumber = user.PhoneNumber,
                 PhoneNumberConfirmed = user.PhoneNumberConfirmed,
+                Role = Enum.TryParse<RegisterForm.UserRole>(roleName, out var userRole) ? userRole : RegisterForm.UserRole.Student
             };
         }
 
@@ -50,6 +54,8 @@ public class AuthService : IAuthService
             throw new BusinessException("Account is locked");
         if (result.IsNotAllowed)
             throw new BusinessException("Account is not allowed to login");
+        if (!result.Succeeded)
+            throw new NotFoundException("User Not Found");
 
         throw new BusinessException("Login Failed");
     }

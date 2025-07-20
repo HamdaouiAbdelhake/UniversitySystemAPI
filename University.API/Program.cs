@@ -23,7 +23,7 @@ builder.Host.ConfigureContainer<ContainerBuilder>(builder =>
     });
 // Logger
 Log.Logger = new LoggerConfiguration()
-    .MinimumLevel.Warning()
+    .MinimumLevel.Information()
     .WriteTo.File("Logs/log-.txt", rollingInterval: RollingInterval.Day)
     .CreateLogger();
 builder.Host.UseSerilog();
@@ -94,7 +94,23 @@ builder.Services.AddSwaggerGen(c =>
     });
 });
 
+builder.Services.AddCors(options =>
+{
+    options.AddPolicy("Frontend",
+        builder =>
+        {
+            builder.WithOrigins("http://localhost:3000", "https://localhost:3000")
+                .AllowAnyHeader()
+                .AllowAnyMethod()
+                .AllowCredentials();
+        }
+    );
+});
+
+
 var app = builder.Build();
+
+app.UseCors("Frontend");
 
 // Configure the HTTP request pipeline.
 if (app.Environment.IsDevelopment())
