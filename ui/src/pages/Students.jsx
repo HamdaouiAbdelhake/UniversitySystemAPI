@@ -1,11 +1,13 @@
 import { useEffect, useState } from "react";
 import api from "../services/api";
-import { message, Spin, Table, Card } from "antd";
+import { message, Spin, Table, Card, Button, Space } from "antd";
+import { useNavigate } from "react-router-dom";
 
 export default function Students() {
     const [loading, setLoading] = useState(false);
     const [students, setStudents] = useState([]);
     const [messageApi, contextHolder] = message.useMessage();
+    const navigate = useNavigate();
 
     useEffect(() => {
         const fetchStudents = async () => {
@@ -21,7 +23,9 @@ export default function Students() {
                     console.log(response.data);
                 }
             } catch (error) {
-                messageApi.error("Error fetching students data: " + error.message);
+                messageApi.error(
+                    "Error fetching students data: " + error.message
+                );
                 console.log(error);
             } finally {
                 setLoading(false);
@@ -30,6 +34,17 @@ export default function Students() {
         fetchStudents();
     }, [messageApi]);
 
+    const handleAddStudent = () => {
+        navigate("/students/create");
+    };
+
+    const handleEditStudent = (studentId) => {
+        navigate(`/students/${studentId}/edit`);
+    };
+
+    const handleDeleteStudent = (studentId) => {
+        navigate(`/students/${studentId}/delete`);
+    };
 
     const columns = [
         {
@@ -38,14 +53,9 @@ export default function Students() {
             key: "id",
         },
         {
-            title: "First Name",
-            dataIndex: "firstName",
+            title: "Name",
+            dataIndex: "name",
             key: "firstName",
-        },
-        {
-            title: "Last Name",
-            dataIndex: "lastName",
-            key: "lastName",
         },
         {
             title: "Email",
@@ -53,28 +63,52 @@ export default function Students() {
             key: "email",
         },
         {
-            title: "Phone",
-            dataIndex: "phone",
-            key: "phone",
+            title: "Actions",
+            key: "actions",
+            render: (_, record) => (
+                <Space size="middle">
+                    <Button
+                        type="primary"
+                        size="small"
+                        onClick={() => handleEditStudent(record.id)}
+                    >
+                        Edit
+                    </Button>
+                    <Button
+                        type="primary"
+                        danger
+                        size="small"
+                        onClick={() => handleDeleteStudent(record.id)}
+                    >
+                        Delete
+                    </Button>
+                </Space>
+            ),
         },
     ];
     return (
         <>
-        {contextHolder}
-        <Card
-            title="Students"
-        >
-            <Spin spinning={loading}>
-                <Table
-                    dataSource={students}
-                    columns={columns}
-                    rowKey="id"
-                    pagination={{ pageSize: 10 }}
-                />
-            </Spin>
-        </Card>
+            {contextHolder}
+            <Card
+                title="Students"
+                extra={
+                    <Button
+                        type="primary"
+                        onClick={handleAddStudent}
+                    >
+                        Add Student
+                    </Button>
+                }
+            >
+                <Spin spinning={loading}>
+                    <Table
+                        dataSource={students}
+                        columns={columns}
+                        rowKey="id"
+                        pagination={{ pageSize: 10 }}
+                    />
+                </Spin>
+            </Card>
         </>
     );
-    
 }
-
